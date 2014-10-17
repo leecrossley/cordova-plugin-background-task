@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="uk.co.ilee.backgroundtask" version="0.1.0">
+    <name>Background Task</name>
+    <author>Lee Crossley (http://ilee.co.uk/)</author>
+    <description>Cordova / PhoneGap Plugin for running background tasks (will also run for up to 3 minutes after the app is suspended).</description>
+    <keywords>cordova, background, task, suspend</keywords>
+    <license>MIT</license>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    <js-module src="www/backgroundtask.js" name="BackgroundTask">
+        <clobbers target="backgroundtask" />
+    </js-module>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BackgroundTask">
+                <param name="ios-package" value="BackgroundTask" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/BackgroundTask.h" />
+        <source-file src="src/ios/BackgroundTask.m" />
+    </platform>
+</plugin>
