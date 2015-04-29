@@ -1,0 +1,35 @@
+{
+  "name": "cordova-plugin-background-task",
+  "version": "0.2.0",
+  "author": "Lee Crossley <leee@hotmail.co.uk> (http://ilee.co.uk/)",
+  "description": "Cordova / PhoneGap Plugin for running background tasks (will also run for up to 3 minutes after the app is suspended).",
+  "cordova": {
+    "id": "cordova-plugin-background-task",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leecrossley/cordova-plugin-background-task.git"
+  },
+  "keywords": [
+    "cordova",
+    "background",
+    "task",
+    "suspend",
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leecrossley/cordova-plugin-background-task/issues"
+  },
+  "homepage": "https://github.com/leecrossley/cordova-plugin-background-task#readme"
+}
