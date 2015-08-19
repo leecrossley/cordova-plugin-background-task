@@ -7,26 +7,32 @@
 #import "Cordova/CDVViewController.h"
 #import "BackgroundTask.h"
 
-static UIBackgroundTaskIdentifier backgroundTaskId;
 
 @implementation BackgroundTask
 
-+ (void) initialize
-{
-    backgroundTaskId = UIBackgroundTaskInvalid;
-}
-
 - (void) start:(CDVInvokedUrlCommand*)command;
 {
-    backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    __block UIBackgroundTaskIdentifier backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskId];
         backgroundTaskId = UIBackgroundTaskInvalid;
     }];
 
     [self.commandDelegate runInBackground:^{
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        CDVPluginResult* pluginResult = [CDVPluginResult
+                                         resultWithStatus:CDVCommandStatus_OK
+                                         messageAsInt:(int)backgroundTaskId];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
+}
+
+- (void) stop:(CDVInvokedUrlCommand*)command;
+{
+    if ([command.arguments count] > 0) {
+        int backgroundTaskId = [[command.arguments objectAtIndex:0] intValue];
+        [[UIApplication sharedApplication] endBackgroundTask:(UIBackgroundTaskIdentifier)backgroundTaskId];
+    } else {
+        NSLog(@"Called BackgroundTask.stop without TaskId");
+    }
 }
 
 @end
